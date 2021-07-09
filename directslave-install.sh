@@ -1,28 +1,32 @@
 #!/bin/sh
 # @author jordavin,phillcoxon,mantas15
-# @updated by Afrizal-id
-# @date 07.12.2019
-# @version 1.0.5
+# @updated by Afrizal-id, Stijnb1234
+# @date 09.07.2021
+# @version 1.0.6
 # @source 
 # ------------------------------------------------------------------------------
 sshport=22;
+
 #Check that user is root.
 if [ “$(id -u)” = “0” ]; then
-printf "Bingo! you are root. Continue on....\n"
-  else
-printf "Sorry, This script must be run as root\n"
-exit;
+	printf "We are root. Continue on....\n"
+else
+	printf "This script must be run as root\n"
+	exit
 fi
+
 #What Distro are you on?
 printf "Distro are you on??\n" 2>&1
-OS='cat /etc/redhat-release | awk {'print $1}'
-if [ "$OS" = "CentOS" ]; then
-echo "System runs on CentOS 7.X. Checking Continue on....";
-VN='cat /etc/redhat-release | awk {'print $3}'
-else [ "$VN" != "7.*" ]; elseif
-echo "Installation failed. System runs on unsupported Linux. Exiting...";
-exit;
-fi 
+if [ "${OS}" = "CentOS" ]; then
+	echo "System runs on "${OS}" "${VN}". Checking Continue on...."
+	mkdir -p "${builddir}"
+else
+	[ "${VN}" != "7.*" ]
+	elseif
+	echo "System runs on  unsupported Linux. Exiting..."
+	exit
+fi
+
 if [ -z "$1" ]; then
  echo "usage <username> <userpass> <master ip>";
  exit 0;
